@@ -9,13 +9,22 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      
-      redirect_to new_session_path, notice: "ユーザ登録が完了しました！続けてログインしてください。"
+      start_new_session_for @user
+      redirect_to user_path(@user), notice: "ユーザ登録が完了しました！続けてログインしてください。"
 
       else
       
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def index
+    @user = User.all
+    
+  end
+
+  def show
+    
   end
  
   private
