@@ -1,7 +1,4 @@
 
-
-<p id="notice"><%= notice %></p> <!-- フラッシュメッセージ表示用 -->
-
 <div class="container px-5 px-sm-0">
   <!-- バリデーションエラーがある場合の表示 -->
   <% if @book.errors.any? %>
@@ -18,46 +15,9 @@
   <div class="row">
     <!-- 左側カラム: col-md-3 -->
     <div class="col-md-3">
-      <h2>User info</h2>
-      <!-- 画像にあった「profile_image」を呼び出す（後述） -->
-      <%= image_tag @user.get_profile_image(100,100) %>
-      
-      <table class="table">
-        <tbody>
-          <tr>
-            <th>name</th>
-            <th><%= @user.name %></th>
-          </tr>
-          <tr>
-            <th>introduction</th>
-            <th><%= @user.introduction %></th>
-          </tr>
-        </tbody>
-      </table>
-      
-      <div class="row">
-        <!-- ユーザー編集ページへのリンク（FontAwesomeアイコン使用） -->
-        <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i> 編集 <!-- ここはご提示画像は歯車アイコン -->
-        <% end %>
-      </div>
-
-      <h2 class="mt-3">New book</h2>
-      <%= form_with model: @book, local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :title, "Title" %>
-          <%= f.text_field :title, class: "form-control book_title" %>
-        </div>
-        <div class="form-group">
-          <%= f.label :body, "Opinion" %>
-          <%= f.text_area :body, class: "form-control book_body" %>
-        </div>
-        <div class="form-group">
-          <%= f.submit 'Create Book', class: "btn btn-success" %>
-        </div>
-      <% end %>
+     <%= render 'users/info', user: @user %>
+     <%= render 'books/form', book: @book %>
     </div>
-
     <!-- 右側カラム: col-md-8 offset-md-1 (オフセットで隙間を空ける) -->
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       start_new_session_for @user
-      redirect_to user_path(@user), notice: "ユーザ登録が完了しました！続けてログインしてください。"
+      redirect_to user_path(@user), notice: "Welcome! You have signed up successfully."
 
       else
       
@@ -29,8 +29,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id]) # 詳細を見たいユーザー
-    @books = @user.books           # そのユーザーが投稿した本の一覧
+    @user = User.find(params[:id]) 
+    @books = @user.books           
     @book = Book.new
     
   end
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
+      redirect_to user_path(@user), notice: "You have updated user successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -52,13 +52,8 @@ class UsersController < ApplicationController
  
   def user_params
     
-    params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :introduction, :profile_image)
   end
-
-  def user_params
-    params.require(:user).permit(:name, :introduction, :profile_image)
-  end
-
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == Current.user.id

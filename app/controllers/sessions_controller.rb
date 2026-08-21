@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     if (user = User.find_by(name: params[:name]))&.authenticate(params[:password])
       start_new_session_for user
-      redirect_to user_path(user)
+      redirect_to user_path(user), notice: "Signed in successfully."
     else
       redirect_to new_session_path, alert: "Try another email address or password."
     end
@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
 
   def destroy
     terminate_session
-    redirect_to after_logout_url
+    redirect_to after_logout_url, notice: "Signed out successfully."
   end
 end
