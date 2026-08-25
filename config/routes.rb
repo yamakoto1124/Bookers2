@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   root to: "homes#top"
   get 'home/about' => 'homes#about', as: 'about'
-  resources :users, only: [:new, :create, :index, :show, :edit, :update], path_names: { new: 'sign_up'}
-  resource :session
+  
+  resource :session, only: [:new, :create, :destroy]
+
+  
+  resources :users, path_names: { new: "sign_up" }, only: [:index, :show, :edit, :update, :new, :create]
+
+  
+  resources :books, only: [:index, :show, :edit, :update, :create, :destroy]
+
   resources :passwords, param: :token
-  resources :books, only:[:index, :show, :edit, :update, :destroy, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

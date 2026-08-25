@@ -47,6 +47,10 @@ class UsersController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def ensure_correct_user
+    
+  end
  
   private
  

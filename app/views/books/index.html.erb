@@ -1,6 +1,6 @@
 
 <div class="container px-5 px-sm-0">
-  <!-- バリデーションエラーがある場合の表示 -->
+  
   <% if @book.errors.any? %>
     <div id="error_explanation">
       <h3><%= @book.errors.count %> errors prohibited this book from being saved:</h3>
@@ -13,12 +13,12 @@
   <% end %>
 
   <div class="row">
-    <!-- 左側カラム: col-md-3 -->
+    
     <div class="col-md-3">
      <%= render 'users/info', user: @user %>
      <%= render 'books/form', book: @book %>
     </div>
-    <!-- 右側カラム: col-md-8 offset-md-1 (オフセットで隙間を空ける) -->
+    
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table table-hover table-inverse">
@@ -34,7 +34,7 @@
           <% @books.each do |book| %>
             <tr>
               <td>
-                <!-- 投稿者の詳細ページへのリンク（画像クリック） -->
+                
                 <%= link_to user_path(book.user) do %>
                   <%= image_tag book.user.get_profile_image(50,50) %>
                 <% end %>
